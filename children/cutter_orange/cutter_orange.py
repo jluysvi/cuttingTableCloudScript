@@ -92,7 +92,7 @@ def updateCloudHistory():
     secret = ".On8Q~4lRarjGt1aNfodai~AWDG_yF4CAaZCeaCR"
     #ID's for the drive and the files locations, as well as the sheet ID.
     drive_id = "b!3t909SHqSU-VuuWyN4bJ7OgPxkZ8zRpDpMZPdo8Zl8suSeloy-UuTJxLb1cB0KnM"
-    historycsv_id = "54bab9b8-13b4-4cc4-9e6a-a68cc14a78f7"
+    historycsv_id = "8bda915c-3067-4430-8b84-b5cd2fc836b1"
     global sync_history
     while True:
         if sync_history:
