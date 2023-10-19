@@ -111,7 +111,7 @@ def updateCloudHistory():
                     logging.info("No suitable token exists in cache. Let's get a new one from AAD.")
                     result = app.acquire_token_for_client(scopes=scope)
 
-                with open('history.csv', 'r') as file:
+                with open(history_file, 'r') as file:
                     # Read the contents of the file as a string
                     csv_content = file.read()
 
