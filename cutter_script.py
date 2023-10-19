@@ -172,7 +172,7 @@ def displayValues():
     root.title("Labels Example")
     root.attributes('-fullscreen', True)
 
-    root.configure(bg="orange", cursor="none")
+    root.configure(bg="white", cursor="none")
 
     font_size_small = 30
     font_size_large = 300
@@ -183,10 +183,10 @@ def displayValues():
     cutsdisplay = tk.Variable(root, daily_cuts)
     targetdisplay = tk.Variable(root, daily_target)
 
-    label1 = tk.Label(root, bg="orange", fg="white", text="Total", font=("Arial", font_size_small))
-    label2 = tk.Label(root, bg="orange", fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
-    label3 = tk.Label(root, bg="orange", fg="white", text="Daily Target", font=("Arial", font_size_small))
-    label4 = tk.Label(root, bg="orange", fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
+    label1 = tk.Label(root, bg="white", fg="white", text="Total", font=("Arial", font_size_small))
+    label2 = tk.Label(root, bg="white", fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
+    label3 = tk.Label(root, bg="white", fg="white", text="Daily Target", font=("Arial", font_size_small))
+    label4 = tk.Label(root, bg="white", fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
 
     label1.grid(row=0, column=0, pady=(15, 0))
     label2.grid(row=1, column=0)
