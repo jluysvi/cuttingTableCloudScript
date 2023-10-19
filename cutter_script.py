@@ -32,7 +32,8 @@ def retrieveHistory():
     print("Daily Cuts from history: " + str(daily_cuts))
 
 def serialAndHistory():
-    #arduinoSerial = serial.Serial('/dev/ttyS4', 9600)
+    arduinoSerial = serial.Serial('/dev/ttyS4', 9600)
+    arduinoSerial.write("start")
     global history_file
     found = False
     new_cuts = False
@@ -43,10 +44,10 @@ def serialAndHistory():
     while True:
         #If there is anything waiting in the serial buffer, check to see if it's the correct character and then increment the cutter count.
         
-        '''serialvalue = arduinoSerial.readline().strip().decode('utf-8')
+        serialvalue = arduinoSerial.readline().strip().decode('utf-8')
         if serialvalue == 'A':
             daily_cuts += 1
-            new_cuts = True '''
+            new_cuts = True 
 
         '''userin = input()
         if userin == 'A':
@@ -150,10 +151,6 @@ def getCloudTarget():
                 logging.info("No suitable token exists in cache. Let's get a new one from AAD.")
                 result = app.acquire_token_for_client(scopes=scope)
 
-            with open(history_file, 'r') as file:
-                # Read the contents of the file as a string
-                csv_content = file.read()
-
             if "access_token" in result:
                 endpoint = f"https://graph.microsoft.com/v1.0/drives/{drive_id}/items/{configfile_id}/workbook/worksheets/{configsheet_id}/range(address='{number_cell}')"
                 response = requests.get(endpoint, headers={'Authorization': 'Bearer ' + result['access_token']}).json()
@@ -172,7 +169,7 @@ def displayValues():
     root.title("Labels Example")
     root.attributes('-fullscreen', True)
 
-    root.configure(bg="white", cursor="none")
+    root.configure(bg="green", cursor="none")
 
     font_size_small = 30
     font_size_large = 300
@@ -183,10 +180,10 @@ def displayValues():
     cutsdisplay = tk.Variable(root, daily_cuts)
     targetdisplay = tk.Variable(root, daily_target)
 
-    label1 = tk.Label(root, bg="white", fg="white", text="Total", font=("Arial", font_size_small))
-    label2 = tk.Label(root, bg="white", fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
-    label3 = tk.Label(root, bg="white", fg="white", text="Daily Target", font=("Arial", font_size_small))
-    label4 = tk.Label(root, bg="white", fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
+    label1 = tk.Label(root, bg="green", fg="white", text="Total", font=("Arial", font_size_small))
+    label2 = tk.Label(root, bg="green", fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
+    label3 = tk.Label(root, bg="green", fg="white", text="Daily Target", font=("Arial", font_size_small))
+    label4 = tk.Label(root, bg="green", fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
 
     label1.grid(row=0, column=0, pady=(15, 0))
     label2.grid(row=1, column=0)

@@ -33,7 +33,7 @@ def retrieveHistory():
 
 def serialAndHistory():
     arduinoSerial = serial.Serial('/dev/ttyS4', 9600)
-    arduinoSerial.write("start")
+    arduinoSerial.write('start'.encode('utf-8'))
     global history_file
     found = False
     new_cuts = False
