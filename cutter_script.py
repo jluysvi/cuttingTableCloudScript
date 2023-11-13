@@ -7,12 +7,13 @@ import requests
 import msal
 import threading
 import tkinter as tk
+import config
 
 #Start the serial port.
 daily_cuts = 0
 daily_target = 0
 sync_history = False
-history_file = 'history.csv'
+history_file = '/home/radxa/Documents/history.csv'
 
 def retrieveHistory():
     global history_file   
@@ -33,7 +34,7 @@ def retrieveHistory():
 
 def serialAndHistory():
     arduinoSerial = serial.Serial('/dev/ttyS4', 9600)
-    arduinoSerial.write("start")
+    arduinoSerial.write('start'.encode('utf-8'))
     global history_file
     found = False
     new_cuts = False
@@ -93,7 +94,7 @@ def updateCloudHistory():
     secret = ".On8Q~4lRarjGt1aNfodai~AWDG_yF4CAaZCeaCR"
     #ID's for the drive and the files locations, as well as the sheet ID.
     drive_id = "b!3t909SHqSU-VuuWyN4bJ7OgPxkZ8zRpDpMZPdo8Zl8suSeloy-UuTJxLb1cB0KnM"
-    historycsv_id = "54bab9b8-13b4-4cc4-9e6a-a68cc14a78f7"
+    historycsv_id = config.params['history_csv']
     global sync_history
     while True:
         if sync_history:
@@ -111,7 +112,7 @@ def updateCloudHistory():
                     logging.info("No suitable token exists in cache. Let's get a new one from AAD.")
                     result = app.acquire_token_for_client(scopes=scope)
 
-                with open('history.csv', 'r') as file:
+                with open(history_file, 'r') as file:
                     # Read the contents of the file as a string
                     csv_content = file.read()
 
@@ -169,7 +170,7 @@ def displayValues():
     root.title("Labels Example")
     root.attributes('-fullscreen', True)
 
-    root.configure(bg="green", cursor="none")
+    root.configure(bg=config.params['colour'], cursor="none")
 
     font_size_small = 30
     font_size_large = 300
@@ -180,10 +181,10 @@ def displayValues():
     cutsdisplay = tk.Variable(root, daily_cuts)
     targetdisplay = tk.Variable(root, daily_target)
 
-    label1 = tk.Label(root, bg="green", fg="white", text="Total", font=("Arial", font_size_small))
-    label2 = tk.Label(root, bg="green", fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
-    label3 = tk.Label(root, bg="green", fg="white", text="Daily Target", font=("Arial", font_size_small))
-    label4 = tk.Label(root, bg="green", fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
+    label1 = tk.Label(root, bg=config.params['colour'], fg="white", text="Total", font=("Arial", font_size_small))
+    label2 = tk.Label(root, bg=config.params['colour'], fg="white", textvariable=cutsdisplay, font=("Arial", font_size_large))
+    label3 = tk.Label(root, bg=config.params['colour'], fg="white", text="Daily Target", font=("Arial", font_size_small))
+    label4 = tk.Label(root, bg=config.params['colour'], fg="white", textvariable=targetdisplay  , font=("Arial", font_size_large))
 
     label1.grid(row=0, column=0, pady=(15, 0))
     label2.grid(row=1, column=0)
