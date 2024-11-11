@@ -1,2 +1,2 @@
 # Cutting Table Cloud Script
-This repository contains the Python script that saves a history of the cutting table activities and syncs that history as well as the daily target for the factory.
+A script that runs on a Raspberry Pi and communicates with a microcontroller via Serial. The daily target is set via a spreasheet in Sharepoint and grabbed with the Microsoft GraphAPI. 
